@@ -1,0 +1,20 @@
+[
+    {
+        "title": "Game Programmer Intern",
+        "company": "Gameloft",
+        "description": "Internship focusing on R&D of bare-metal VMs in Amazon Web Services",
+        "period": "May 2020 - August 2020"
+    },
+    {
+        "title": "Web Developer",
+        "company": "Telkomsel",
+        "description": "Part time developer creating a video streaming service, mainly worked on the backend & database side with some input on frontend integration.",
+        "period": "October 2020 - January 2021"
+    },
+    {
+        "title": "Site Reliability Engineer",
+        "company": "Shopee",
+        "description": "SRE focusing on creating & maintaining K8S clusters and its monitoring systems",
+        "period": "September 2021 - Present"
+    }
+]

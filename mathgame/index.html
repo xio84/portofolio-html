@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Simple Math Game</title>
+<style>
+body {
+  font-family: sans-serif;
+  text-align: center;
+}
+#game-area {
+  margin-top: 50px;
+}
+#question {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+#answer {
+  font-size: 1.5em;
+  padding: 10px;
+  border: 1px solid #ccc;
+  width: 100px;
+  margin: 0 auto;
+}
+button {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  margin-top: 20px;
+  cursor: pointer;
+}
+#result {
+  margin-top: 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<h1>Math Game</h1>
+<h2 id="score">Score: 0/0</h2>
+
+<div id="game-area">
+  <div id="question"></div>
+  <form onsubmit="checkAnswer()">
+    <input type="number" id="answer">
+    <input type="submit" hidden />
+    <button type="submit">Submit</button>
+  </form>
+  <div id="result"></div>
+</div>
+
+<script>
+let num1, num2, operator, correctAnswer;
+let score = 0;
+let totalQuestions = 0;
+
+const form = document.querySelector('form');
+
+form.addEventListener('keypress', function (event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    checkAnswer();
+  }
+});
+
+function generateQuestion() {
+  num1 = Math.floor(Math.random() * 10) + 1; // Numbers between 1 and 10
+  num2 = Math.floor(Math.random() * 10) + 1;
+
+  const operators = ["+", "-", "*"]; // You can add "/" if you handle division by zero
+  operator = operators[Math.floor(Math.random() * operators.length)];
+
+  let questionText = `${num1} ${operator} ${num2} = ?`;
+  document.getElementById("question").textContent = questionText;
+
+  switch (operator) {
+    case "+":
+      correctAnswer = num1 + num2;
+      break;
+    case "-":
+      correctAnswer = num1 - num2;
+      break;
+    case "*":
+      correctAnswer = num1 * num2;
+      break;
+    // case "/":  // Handle division if you add it
+    //   correctAnswer = num1 / num2;
+    //   break;
+  }
+
+  document.getElementById("answer").value = ""; // Clear previous answer
+}
+
+function checkAnswer() {
+  const userAnswer = parseFloat(document.getElementById("answer").value);
+
+  if (isNaN(userAnswer)) {
+      alert("Please enter a valid number.");
+      return;
+  }
+
+  totalQuestions++;
+
+  if (userAnswer === correctAnswer) {
+    score++;
+    document.getElementById("result").textContent = "Correct!";
+    document.getElementById("result").style.color = "green";
+  } else {
+    document.getElementById("result").textContent = `Incorrect. The answer is ${correctAnswer}.`;
+    document.getElementById("result").style.color = "red";
+  }
+
+  generateQuestion(); // Generate the next question
+
+  // Display Score (Optional - you can put this elsewhere)
+  document.title = `Score: ${score}/${totalQuestions}`; //Update title bar with score
+  document.getElementById("score").innerText = `Score: ${score}/${totalQuestions}`
+}
+
+
+generateQuestion(); // Start the game by generating the first question
+
+</script>
+
+</body>
+</html>
