@@ -1,0 +1,10 @@
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+html {
+  overflow: auto;
+  scroll-snap-type: both mandatory;
+  overscroll-behavior-x: contain;
+}
