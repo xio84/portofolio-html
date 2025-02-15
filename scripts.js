@@ -64,30 +64,37 @@ const divBounds = [
   },
   {
     id: "education",
-    picture: "assets/pictures/0.jpg",
+    picture: "assets/pictures/books.jpg",
     bounds:
       document.getElementById("education").getBoundingClientRect().top -
       document.getElementById("about").getBoundingClientRect().top,
   },
   {
     id: "skills",
-    picture: "assets/pictures/0.jpg",
+    picture: "assets/pictures/tools.jpg",
     bounds:
       document.getElementById("skills").getBoundingClientRect().top -
       document.getElementById("about").getBoundingClientRect().top,
   },
   {
     id: "interests",
-    picture: "assets/pictures/0.jpg",
+    picture: "assets/pictures/controller.jpg",
     bounds:
       document.getElementById("interests").getBoundingClientRect().top -
       document.getElementById("about").getBoundingClientRect().top,
   },
   {
     id: "projects",
-    picture: "assets/pictures/0.jpg",
+    picture: "assets/pictures/hardhat.jpg",
     bounds:
       document.getElementById("projects").getBoundingClientRect().top -
+      document.getElementById("about").getBoundingClientRect().top,
+  },
+  {
+    id: "awards",
+    picture: "assets/pictures/trophy.jpg",
+    bounds:
+      document.getElementById("awards").getBoundingClientRect().top -
       document.getElementById("about").getBoundingClientRect().top,
   },
 ];
