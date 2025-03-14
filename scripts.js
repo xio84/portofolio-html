@@ -48,7 +48,6 @@ img1.src = "assets/pictures/0.jpg";
 const img2 = new Image();
 img2.src = "assets/pictures/0.jpg";
 
-
 const divBounds = [
   {
     id: "about",
@@ -116,9 +115,12 @@ window.addEventListener("scroll", () => {
         ? 0
         : scrollDiff -
           (divBounds[currDiv + 1].bounds - divBounds[currDiv].bounds) / 4;
-    strength = Math.min(strengthLimit, strength)
+    strength = Math.min(strengthLimit, strength);
     img1.src = divBounds[currDiv].picture;
-    img2.src = currDiv === divBounds.length - 1 ? divBounds[currDiv].picture : divBounds[currDiv + 1].picture;
+    img2.src =
+      currDiv === divBounds.length - 1
+        ? divBounds[currDiv].picture
+        : divBounds[currDiv + 1].picture;
   }
   console.log([
     scrollY,
@@ -130,20 +132,24 @@ window.addEventListener("scroll", () => {
   blurRadius = strength < 0 ? 0 : Math.abs(strength) / 500; // Adjust divisor for blur amount
   if (strength < 0) {
     ctx.drawImage(drawSwirl(0, img1), 0, 0);
-   } else {
-    ctx.globalAlpha = (strengthLimit - strength) / strengthLimit
+  } else {
+    ctx.globalAlpha = (strengthLimit - strength) / strengthLimit;
     ctx.drawImage(drawSwirl(-strength, img1), 0, 0);
-    ctx.globalAlpha = (strength) / strengthLimit;
-    ctx.drawImage(drawSwirl(strengthLimit - strength, img2, (strength) / strengthLimit), 0, 0);
-    ctx.globalAlpha = 1.0
-   }
+    ctx.globalAlpha = strength / strengthLimit;
+    ctx.drawImage(
+      drawSwirl(strengthLimit - strength, img2, strength / strengthLimit),
+      0,
+      0
+    );
+    ctx.globalAlpha = 1.0;
+  }
 });
 
 function drawSwirl(offset, image) {
-  const tempCanvas = document.createElement('canvas');
+  const tempCanvas = document.createElement("canvas");
   tempCanvas.width = canvas.width;
   tempCanvas.height = canvas.height;
-  const tempCtx = tempCanvas.getContext('2d');
+  const tempCtx = tempCanvas.getContext("2d");
   // Draw the image scaled and potentially blurred
   // tempCtx.filter = `blur(${blurRadius}px)`; // Apply blur
   tempCtx.drawImage(image, 0, 0); // Draw scaled image
@@ -192,5 +198,30 @@ function drawSwirl(offset, image) {
   const newImageData = new ImageData(newData, canvas.width, canvas.height);
 
   tempCtx.putImageData(newImageData, 0, 0); // Update the canvas with the swirled image
-  return tempCanvas
+  return tempCanvas;
 }
+
+const animatedElements = document.getElementsByClassName("star");
+
+const skillssection = [
+  document.getElementById("animated-a"),
+  document.getElementById("animated-b"),
+  document.getElementById("animated-c"),
+  document.getElementById("animated-d"),
+  document.getElementById("animated-e"),
+];
+
+skillssection.forEach((section) => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        Array.prototype.forEach.call(animatedElements, (x) =>
+          x.classList.add("visible")
+        );
+        observer.unobserve(section); // Stop observing after it's visible
+      }
+    });
+  });
+  
+  observer.observe(section);
+})
